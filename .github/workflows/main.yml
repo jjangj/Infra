@@ -30,6 +30,13 @@ jobs:
           target: "/home/ubuntu/myapp/"
           strip_components: 1
 
+      - name: Setup SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H <host> >> ~/.ssh/known_hosts
+
       - name: Config FrontEnd file
         run: |
           sed -i 's/_API_ADDRESS_/${{ secrets.HOST }}/g' frontend/index.html
