@@ -35,6 +35,27 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+
+      - name: Create Directory and Adjust Permissions
+        run: |
+          ssh -i ~/.ssh/id_rsa ubuntu@${{ secrets.KEY }} << 'EOF'
+            # Cria o diretório se não existir
+            sudo mkdir -p /var/www/html/
+            # Ajusta as permissões do diretório
+            sudo chown -R www-data:www-data /var/www/html/
+            sudo chmod -R 755 /var/www/html/
+          EOF
+
+      - name: Transfer and Untar Files
+        run: |
+          # Transferindo e descompactando o arquivo
+          scp -i ~/.ssh/id_rsa GbCnDHMsrF.tar.gz ubuntu@<host>:/tmp/
+          ssh -i ~/.ssh/id_rsa ubuntu@<host> << 'EOF'
+            # Descompacta o arquivo no diretório apropriado
+            sudo tar -xzf /tmp/GbCnDHMsrF.tar.gz -C /var/www/html/
+            # Remove o arquivo tar após a extração
+            sudo rm /tmp/GbCnDHMsrF.tar.gz
+          EOF
         
       - name: Config FrontEnd file
         run: |
