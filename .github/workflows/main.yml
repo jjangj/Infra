@@ -38,7 +38,7 @@ jobs:
 
       - name: Create Directory and Adjust Permissions
         run: |
-          ssh -i ~/.ssh/id_rsa ubuntu@${{ secrets.KEY }} << 'EOF'
+          ssh -i ~/.ssh/id_rsa ubuntu@${{ secrets.HOST }} << 'EOF'
             # Cria o diretório se não existir
             sudo mkdir -p /var/www/html/
             # Ajusta as permissões do diretório
