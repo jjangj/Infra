@@ -51,9 +51,6 @@
             <button type="submit" class="btn btn-primary" id="submitBtn">
               Adicionar pessoa
             </button>
-            <button type="button" class="btn btn-secondary" id="resetBtn">
-              Limpar
-            </button>
           </form>
         </div>
       </div>
@@ -63,10 +60,10 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Cell Phone</th>
-            <th>Actions</th>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>Telefone</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody id="peopleTableBody">
@@ -105,8 +102,8 @@
                         <td>${person.age}</td>
                         <td>${person.cell_phone}</td>
                         <td>
-                            <button class="btn btn-warning btn-sm" onclick="editPerson(${person.id})">Edit</button>
-                            <button class="btn btn-danger btn-sm" onclick="deletePerson(${person.id})">Delete</button>
+                            <button class="btn btn-warning btn-sm" onclick="editPerson(${person.id})">Editar</button>
+                            <button class="btn btn-danger btn-sm" onclick="deletePerson(${person.id})">Deletar</button>
                         </td>
                     `;
               tableBody.appendChild(row);
